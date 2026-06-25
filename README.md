@@ -114,19 +114,32 @@ A continuación se detalla el flujo visual de la experiencia unificada:
 
 **1. Portada de Acceso (Home)**
 Página raíz que unifica los accesos al prompt y a las dos landing pages generadas de forma autónoma.
-`01-home`
+![PortadaLanding](Capturas/Landing.png)
 
 **2. Visor del Prompt Utilizado**
 Detalle del prompt final estructurado con etiquetas semánticas (`<task>`, `<design_system>`, `<requirements>`, `<technical_constraints>`), disponible para su lectura desde la portada.
-`02-prompt`
+![VisordePrompt](Capturas/Prompt.png)
 
-**3. La Famiglia — Agente Codex (GPT-5.5)**
-Landing page completa. Se destaca la resolución de la escena Hero (oficina de Vito Corleone, reconocible e iluminada con gradiente) y el Creador de Personaje con proporciones correctas en cuerpo, sombrero y accesorios.
-`03-codex-hero` · `03-codex-personaje`
-
-**4. La Famiglia — Agente Antigravity (Gemini 3.5 Flash)**
+**3. La Famiglia — Agente Antigravity (Gemini 3.5 Flash)**
 Landing page completa. Resolvió el fondo del Hero de forma más sobria, sin texturas, pero sin perder la estética pixel art ni la legibilidad temática. El Creador de Personaje fue su punto más fuerte, con avatares mejor armados que en intentos anteriores.
-`04-antigravity-hero` · `04-antigravity-personaje`
+![Head-HeroSection](Capturas/Cabecera%20y%20Hero%20section-Anti.png)
+![Descripcion](Capturas/Descripcion-Anti.png)
+![Servicios](Capturas/Servicio(Ranking)-Anti.png)
+![Servicios2](Capturas/Servicio(CrearPersonaje)-Anti.png)
+![Reseñas](Capturas/Reseñas-Anti.png)
+![FormularioContacto](Capturas/FormularioContacto-Anti.png)
+![Footer](Capturas/Footer-Anti.png)
+
+**4. La Famiglia — Agente Codex (GPT-5.5)**
+Landing page completa. Se destaca la resolución de la escena Hero (oficina de Vito Corleone, reconocible e iluminada con gradiente) y el Creador de Personaje con proporciones correctas en cuerpo, sombrero y accesorios.
+![Head-HeroSection](Capturas/Cabecera%20y%20Hero%20section-Codex.png)
+![Descripcion](Capturas/Descripcion-Codex.png)
+![Servicios](Capturas/Servicio(Ranking)-Codex.png)
+![Servicios2](Capturas/Servicio(CrearPersonaje)-Codex.png)
+![Reseñas](Capturas/Reseñas-Codex.png)
+![FormularioContacto](Capturas/FormularioContacto-Codex.png)
+![Footer](Capturas/Footer-Codex.png)
+
 
 ## 🛠️ Tecnologías del Proyecto
 
