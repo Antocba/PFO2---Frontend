@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Famiglia — Acceso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #0d0d0d;
+      --bg-card: #1a1a2e;
+      --neon-red: #ff2d55;
+      --neon-gold: #ffd700;
+      --neon-cyan: #00f5ff;
+      --text-crisp: #f0f0f0;
+      --pixel-border: 2px solid;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-crisp);
+      font-family: 'Share Tech Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Scanlines overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.03),
+        rgba(0,0,0,0.03) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Pixel grid background */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,45,85,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,45,85,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      background-color: rgba(13,13,13,0.96);
+      border-bottom: var(--pixel-border) var(--neon-red);
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .logo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 16px;
+      color: var(--neon-gold);
+      text-shadow: 2px 2px 0 #000;
+      letter-spacing: -1px;
+    }
+
+    .logo span { color: var(--neon-red); }
+
+    .header-tag {
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ─── MAIN WRAPPER ─── */
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+      padding: 140px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+    }
+
+    /* ─── INTRO BLOCK ─── */
+    .intro {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* Pixel rose icon */
+    .rose-icon {
+      width: 24px;
+      height: 24px;
+      position: relative;
+      margin: 0 auto 8px;
+    }
+
+    .rose-icon .r-petal {
+      position: absolute;
+      background-color: var(--neon-red);
+    }
+
+    .rose-icon .r-p1 { width: 8px; height: 8px; top: 4px; left: 8px; }
+    .rose-icon .r-p2 { width: 12px; height: 6px; top: 8px; left: 6px; }
+    .rose-icon .r-p3 { width: 6px; height: 4px; top: 14px; left: 9px; background-color: #228B22; }
+
+    .intro-eyebrow {
+      font-size: 12px;
+      color: var(--neon-red);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .intro h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: clamp(20px, 4vw, 34px);
+      color: var(--neon-gold);
+      line-height: 1.5;
+      text-shadow: 4px 4px 0 #000, 0 0 20px rgba(255,215,0,0.2);
+    }
+
+    .intro h1 span { color: var(--neon-red); }
+
+    .intro-sub {
+      font-size: 15px;
+      color: #aaa;
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    /* Decorative divider */
+    .divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
+    }
+
+    .divider-diamond {
+      width: 8px;
+      height: 8px;
+      background-color: var(--neon-gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ─── CARDS GRID ─── */
+    .cards-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── ACCESS CARD ─── */
+    .access-card {
+      background-color: var(--bg-card);
+      border: var(--pixel-border) var(--neon-red);
+      padding: 32px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 5px 5px 0 0 #000;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .access-card:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0,245,255,0.25), 7px 7px 0 0 #000;
+      transform: translateY(-3px);
+    }
+
+    /* Card number badge */
+    .card-num {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      color: var(--neon-gold);
+      background-color: rgba(255,215,0,0.08);
+      border: 1px solid var(--neon-gold);
+      padding: 4px 10px;
+      position: absolute;
+      top: -1px;
+      left: -1px;
+    }
+
+    /* Pixel art icons for each card */
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      position: relative;
+      flex-shrink: 0;
+      margin-top: 10px;
+    }
+
+    /* Icon 1: scroll/document */
+    .icon-scroll .sc-body {
+      position: absolute;
+      background-color: #e8e0c0;
+      width: 36px; height: 44px;
+      top: 6px; left: 10px;
+      border: 2px solid #aaa;
+    }
+    .icon-scroll .sc-line {
+      position: absolute;
+      background-color: #888;
+      height: 2px;
+    }
+    .icon-scroll .sc-l1 { width: 22px; top: 14px; left: 17px; }
+    .icon-scroll .sc-l2 { width: 18px; top: 20px; left: 17px; }
+    .icon-scroll .sc-l3 { width: 20px; top: 26px; left: 17px; }
+    .icon-scroll .sc-l4 { width: 14px; top: 32px; left: 17px; }
+    .icon-scroll .sc-curl {
+      position: absolute;
+      background-color: var(--neon-red);
+      width: 8px; height: 8px;
+      top: 4px; left: 8px;
+    }
+
+    /* Icon 2: pixel character (Agente 1) */
+    .icon-agent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+    }
+    .ic-head {
+      width: 18px; height: 18px;
+      background-color: #ffd2a1;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .ic-head::before {
+      content: '';
+      position: absolute;
+      background-color: #111;
+      width: 20px; height: 5px;
+      top: -3px; left: -1px;
+    }
+    .ic-eyes {
+      position: absolute;
+      top: 7px; left: 3px;
+      width: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .ic-eye { width: 2px; height: 2px; background-color: #111; }
+    .ic-torso {
+      width: 28px; height: 30px;
+      background-color: #1a1a3a; /* blue for Antigravity/Gemini */
+      flex-shrink: 0;
+      border-left: 2px solid #0d0d1e;
+      border-right: 2px solid #0d0d1e;
+      position: relative;
+    }
+    .ic-shirt {
+      width: 8px; height: 10px;
+      background-color: #fff;
+      margin: 0 auto;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+    .ic-legs {
+      width: 20px; height: 22px;
+      position: relative;
+    }
+    .ic-pants { width: 100%; height: calc(100% - 4px); background-color: #1a1a3a; }
+    .ic-shoes { width: 100%; height: 4px; display: flex; justify-content: space-between; }
+    .ic-shoe { width: 7px; height: 4px; background-color: #000; }
+
+    /* Icon 3: pixel character (Agente 2) */
+    .ic-torso-2 {
+      background-color: #1a1a1a; /* dark for Codex/GPT */
+    }
+    .ic-pants-2 { background-color: #1a1a1a; }
+
+    /* ─── Card text ─── */
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align: center;
+      flex: 1;
+      width: 100%;
+    }
+
+    .card-body .card-cta {
+      margin-top: auto;
+    }
+
+    .card-label {
+      font-size: 11px;
+      color: var(--neon-cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .card-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      color: #fff;
+      line-height: 1.7;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    .card-cta {
+      display: inline-block;
+      font-size: 12px;
+      color: var(--neon-red);
+      border: var(--pixel-border) var(--neon-red);
+      padding: 8px 16px;
+      box-shadow: 3px 3px 0 #000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.2s, color 0.2s;
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    .access-card:hover .card-cta {
+      background-color: var(--neon-red);
+      color: #fff;
+    }
+
+    /* ─── PROMPT MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.92);
+      z-index: 200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-box {
+      background-color: #0f0f1e;
+      border: var(--pixel-border) var(--neon-gold);
+      box-shadow: 8px 8px 0 #000;
+      width: 100%;
+      max-width: 800px;
+      padding: 36px;
+      position: relative;
+      margin: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+      border-bottom: 2px solid var(--neon-red);
+      padding-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 12px;
+      color: var(--neon-gold);
+    }
+
+    .modal-close {
+      background: transparent;
+      border: 2px solid var(--neon-red);
+      color: var(--neon-red);
+      font-family: 'Press Start 2P', cursive;
+      font-size: 10px;
+      padding: 6px 12px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #000;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .modal-close:hover {
+      background-color: var(--neon-red);
+      color: #fff;
+    }
+
+    .prompt-content {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      color: #ccc;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Syntax-like highlights */
+    .prompt-content .ph-tag { color: var(--neon-cyan); }
+    .prompt-content .ph-val { color: var(--neon-gold); }
+    .prompt-content .ph-comment { color: var(--neon-red); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: var(--pixel-border) var(--neon-red);
+      padding: 24px 40px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      background-color: rgba(5,5,5,0.9);
+    }
+
+    .footer-logo {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 11px;
+      color: var(--neon-gold);
+    }
+    .footer-logo span { color: var(--neon-red); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: #444;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes blink-border {
+      0%, 100% { border-color: var(--neon-red); }
+      50%       { border-color: var(--neon-cyan); }
+    }
+
+    @keyframes glow-gold {
+      0%, 100% { text-shadow: 4px 4px 0 #000, 0 0 10px rgba(255,215,0,0.2); }
+      50%       { text-shadow: 4px 4px 0 #000, 0 0 30px rgba(255,215,0,0.5); }
+    }
+
+    .intro h1 { animation: glow-gold 3s ease-in-out infinite; }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">LA <span>FAMIGLIA</span></div>
+    <div class="header-tag">Práctica Formativa Obligatoria II</div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- INTRO -->
+    <div class="intro">
+      <div class="rose-icon" aria-hidden="true">
+        <div class="r-petal r-p1"></div>
+        <div class="r-petal r-p2"></div>
+        <div class="r-petal r-p3"></div>
+      </div>
+      <p class="intro-eyebrow">Seleccioná tu acceso</p>
+      <h1>LA <span>FAMIGLIA</span></h1>
+      <p class="intro-sub">
+        Elegí qué querés ver: el prompt exacto utilizado para generar los sitios,
+        o cualquiera de las dos landing pages producidas por los agentes de IA.
+      </p>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-diamond"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards-grid">
+
+      <!-- CARD 1: Prompt -->
+      <div class="access-card" onclick="openPrompt()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openPrompt()">
+        <div class="card-num">01</div>
+
+        <!-- Scroll pixel icon -->
+        <div class="card-icon icon-scroll" aria-hidden="true">
+          <div class="sc-body"></div>
+          <div class="sc-line sc-l1"></div>
+          <div class="sc-line sc-l2"></div>
+          <div class="sc-line sc-l3"></div>
+          <div class="sc-line sc-l4"></div>
+          <div class="sc-curl"></div>
+        </div>
+
+        <div class="card-body">
+          <span class="card-label">Acceso 01</span>
+          <div class="card-title">PROMPT<br>UTILIZADO</div>
+          <p class="card-meta">
+            El prompt exacto enviado a ambos agentes para generar las landing pages.
+          </p>
+          <span class="card-cta">Ver Prompt</span>
+        </div>
+      </div>
+
+      <!-- CARD 2: Agente 1 Antigravity -->
+      <a class="access-card" href="./Agente 1-Antigravity/index.html">
+        <div class="card-num">02</div>
+
+        <!-- Pixel character icon (blue suit = Gemini) -->
+        <div class="card-icon" aria-hidden="true">
+          <div class="icon-agent">
+            <div class="ic-head">
+              <div class="ic-eyes">
+                <div class="ic-eye"></div>
+                <div class="ic-eye"></div>
+              </div>
+            </div>
+            <div class="ic-torso">
+              <div class="ic-shirt"></div>
+            </div>
+            <div class="ic-legs">
+              <div class="ic-pants"></div>
+              <div class="ic-shoes">
+                <div class="ic-shoe"></div>
+                <div class="ic-shoe"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <span class="card-label">Acceso 02</span>
+          <div class="card-title">AGENTE 1<br>ANTIGRAVITY</div>
+          <p class="card-meta">
+            Modelo: Gemini 3.5 Flash<br>
+            Landing page generada por el agente Antigravity.
+          </p>
+          <span class="card-cta">Ver Sitio</span>
+        </div>
+      </a>
+
+      <!-- CARD 3: Agente 2 Codex -->
+      <a class="access-card" href="./Agente 2-Codex/index.html">
+        <div class="card-num">03</div>
+
+        <!-- Pixel character icon (dark suit = GPT) -->
+        <div class="card-icon" aria-hidden="true">
+          <div class="icon-agent">
+            <div class="ic-head" style="background-color: #ffd2a1;">
+              <div class="ic-eyes">
+                <div class="ic-eye"></div>
+                <div class="ic-eye"></div>
+              </div>
+            </div>
+            <div class="ic-torso ic-torso-2">
+              <div class="ic-shirt" style="background-color: #fff;"></div>
+              <!-- Tie detail -->
+              <div style="position:absolute; top:8px; left:50%; transform:translateX(-50%); width:3px; height:10px; background-color:var(--neon-red);"></div>
+            </div>
+            <div class="ic-legs">
+              <div class="ic-pants ic-pants-2"></div>
+              <div class="ic-shoes">
+                <div class="ic-shoe"></div>
+                <div class="ic-shoe"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <span class="card-label">Acceso 03</span>
+          <div class="card-title">AGENTE 2<br>CODEX</div>
+          <p class="card-meta">
+            Modelo: GPT-5.5<br>
+            Landing page generada por el agente Codex.
+          </p>
+          <span class="card-cta">Ver Sitio</span>
+        </div>
+      </a>
+
+    </div><!-- /cards-grid -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">LA <span>FAMIGLIA</span></div>
+    <div class="footer-copy">La Famiglia &copy; 2026 — PFO II</div>
+  </footer>
+
+  <!-- PROMPT MODAL -->
+  <div class="modal-overlay" id="promptModal" onclick="handleOverlayClick(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title">PROMPT UTILIZADO</span>
+        <button class="modal-close" onclick="closePrompt()">✕ CERRAR</button>
+      </div>
+      <div class="prompt-content"><span class="ph-comment">## Rol</span>
+Actuá como un desarrollador Frontend Senior especializado en diseño temático, pixel art web y experiencias visuales inmersivas.
+
+<span class="ph-comment">## Task</span>
+<span class="ph-tag">&lt;task&gt;</span>
+Tu objetivo es desarrollar el código completo, funcional y en un único archivo HTML5 para La Famiglia — una landing page que recopila y presenta las mejores películas del género mafioso de la historia del cine, con una estética visual inspirada en el pixel art estilo Habbo Hotel: colores oscuros con detalles neón, tipografías bold y una identidad visual que contrasta lo elegante de la mafia con lo lúdico del pixel art. Todo el texto del sitio debe estar en español con ortografía correcta, incluyendo tildes y signos de puntuación.
+<span class="ph-tag">&lt;/task&gt;</span>
+
+<span class="ph-comment">## Design system</span>
+<span class="ph-tag">&lt;design_system&gt;</span>
+Aplicá estrictamente la siguiente paleta usando CSS custom properties:
+- <span class="ph-val">--bg-main: #0d0d0d</span> (negro profundo - fondo principal)
+- <span class="ph-val">--bg-card: #1a1a2e</span> (azul noche - fondo de tarjetas)
+- <span class="ph-val">--neon-red: #ff2d55</span> (rojo neón - CTAs y acentos principales)
+- <span class="ph-val">--neon-gold: #ffd700</span> (dorado pixel - títulos, estrellas y detalles)
+- <span class="ph-val">--neon-cyan: #00f5ff</span> (cyan neón - bordes activos, hover states)
+- <span class="ph-val">--text-crisp: #f0f0f0</span> (texto principal)
+- <span class="ph-val">--pixel-border: 2px solid</span> (bordes estilo pixel, sin border-radius)
+
+Tipografía: "Press Start 2P" exclusivamente para el logo y números de ranking. Para todos los demás textos "Share Tech Mono" a un mínimo de 14px.
+<span class="ph-tag">&lt;/design_system&gt;</span>
+
+<span class="ph-comment">## Requirements</span>
+<span class="ph-tag">&lt;requirements&gt;</span>
+La Landing Page debe contener las siguientes secciones en este orden exacto:
+
+1. Header: Barra de navegación sticky con logo "La Famiglia" en "Press Start 2P". Links de navegación (Ranking, Personaje, Reseñas, Contacto). Botón CTA "Entrar a la Familia".
+
+2. Hero Section: Escena pixel art CSS de la oficina de Vito Corleone en El Padrino (escritorio de madera oscura, sillón de respaldo alto, lámpara, cortinas pesadas, personaje mafioso sentado). Título "Las Películas que Definieron la Mafia", subtítulo y dos CTAs.
+
+3. Sobre La Famiglia: Sección breve sobre la misión del sitio.
+
+4. Ranking de Películas: Grid de 6 tarjetas (El Padrino, Goodfellas, Scarface, El Padrino II, Casino, Donnie Brasco), cada una con número de ranking en "Press Start 2P", personaje en pixel art CSS.
+
+5. Creador de Personaje Mafioso: Avatar customizable con 6 atributos:
+   - Tipo de cuerpo: Robusto, Delgado, Alto
+   - Color de piel: Claro, Medio, Oscuro
+   - Tipo de pelo: Corto liso, Rizado, Calvo
+   - Accesorio de cabeza: Sin accesorio, Fedora, Borsalino negro, Gorra
+   - Accesorio en el saco: Sin accesorio, Rosa roja
+   - Ropa: Traje negro, Traje blanco, Campera de cuero
+   El botón "Unirme a la Famiglia" muestra una frase aleatoria de mafia. Exportar como PNG con html2canvas (CDN).
+
+6. Reseñas: Grid de 3 tarjetas con nombre usuario estilo Habbo, puntuación y comentario. Todas del mismo tamaño fijo.
+
+7. Formulario de Contacto: Campos nombre, email, película favorita, mensaje. Sin backend.
+
+8. Footer: Logo, copyright, links rápidos, íconos de redes sociales con glow neón al hover.
+<span class="ph-tag">&lt;/requirements&gt;</span>
+
+<span class="ph-comment">## Technical constraints</span>
+<span class="ph-tag">&lt;technical_constraints&gt;</span>
+1. Cero dependencias locales: Solo CDN. Sin frameworks CSS externos.
+2. CSS puro embebido: Todo en un bloque &lt;style&gt; en el &lt;head&gt;.
+3. JavaScript mínimo e inline: Solo para el creador de personaje, descarga con html2canvas y navegación.
+4. Completitud estricta: Prohibido usar marcadores como &lt;!-- resto del código --&gt;.
+5. Responsivo: Grid de 3 columnas en desktop, 1 columna en mobile.
+6. Contenido de tarjetas sin recortes: height: auto y overflow: visible en tarjetas de Ranking.
+7. Consistencia html2canvas: Construir el avatar sin pseudo-elementos ni filtros CSS complejos.
+<span class="ph-tag">&lt;/technical_constraints&gt;</span>
+
+<span class="ph-comment">## Output format</span>
+<span class="ph-tag">&lt;output_format&gt;</span>
+Devolvé ÚNICAMENTE el código HTML en un solo bloque. Sin explicaciones ni conclusiones.
+<span class="ph-tag">&lt;/output_format&gt;</span></div>
+    </div>
+  </div>
+
+  <script>
+    function openPrompt() {
+      document.getElementById('promptModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePrompt() {
+      document.getElementById('promptModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('promptModal')) {
+        closePrompt();
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePrompt();
+    });
+  </script>
+
+</body>
+</html>
