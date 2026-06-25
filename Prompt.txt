@@ -1,0 +1,77 @@
+Rol
+Actuá como un desarrollador Frontend Senior especializado en diseño temático, pixel art web y experiencias visuales inmersivas.
+
+Task
+<task>
+Tu objetivo es desarrollar el código completo, funcional y en un único archivo HTML5 para La Famiglia — una landing page que recopila y presenta las mejores películas del género mafioso de la historia del cine, con una estética visual inspirada en el pixel art estilo Habbo Hotel: colores oscuros con detalles neón, tipografías bold y una identidad visual que contrasta lo elegante de la mafia con lo lúdico del pixel art. Todo el texto del sitio debe estar en español con ortografía correcta, incluyendo tildes y signos de puntuación.
+</task>
+
+Design system
+<design_system>
+Aplicá estrictamente la siguiente paleta usando CSS custom properties:
+- --bg-main: #0d0d0d (negro profundo - fondo principal)
+- --bg-card: #1a1a2e (azul noche - fondo de tarjetas)
+- --neon-red: #ff2d55 (rojo neón - CTAs y acentos principales)
+- --neon-gold: #ffd700 (dorado pixel - títulos, estrellas y detalles)
+- --neon-cyan: #00f5ff (cyan neón - bordes activos, hover states)
+- --text-crisp: #f0f0f0 (texto principal)
+- --pixel-border: 2px solid (bordes estilo pixel, sin border-radius en elementos pixel art)
+
+Tipografía: usá "Press Start 2P" de Google Fonts exclusivamente para el logo "La Famiglia" en el header y para los números de ranking. Para todos los demás textos usá "Share Tech Mono" a un mínimo de 14px. La estética pixel art se expresa a través de bordes cuadrados (border-radius: 0) en elementos clave y sombras box-shadow escalonadas.
+</design_system>
+
+Requirements
+<requirements>
+La Landing Page debe contener las siguientes secciones en este orden exacto:
+
+1. Header: Barra de navegación sticky con el logo "La Famiglia" en "Press Start 2P" a la izquierda. Links de navegación al centro (Ranking, Personaje, Reseñas, Contacto) en "Share Tech Mono" a 14px mínimo. Botón CTA "Entrar a la Familia" a la derecha con estilo neón rojo.
+
+2. Hero Section: El elemento visual decorativo debe ser una escena construida con CSS y divs en estilo pixel art que evoque de forma INMEDIATAMENTE RECONOCIBLE una de las escenas más icónicas de El Padrino: la oficina oscura de Vito Corleone (escritorio de madera oscura, sillón de respaldo alto, una lámpara con pantalla que ilumina el escritorio desde arriba, cortinas pesadas a los costados, luz tenue tipo persiana entrando de fondo, y un personaje mafioso sentado detrás del escritorio). La prioridad número uno es que cualquier persona que vea la escena diga "esto es la oficina de El Padrino", por sobre cualquier otro criterio técnico de perspectiva.
+
+   Para dar sensación de profundidad y ambiente sin depender de una proyección isométrica 3D perfecta (que en intentos anteriores resultó en paredes mal alineadas o "abiertas"), usá estos recursos, más simples y confiables:
+   - Un fondo de pared con gradiente oscuro (más claro en el centro, donde está el personaje, más oscuro hacia los bordes) para simular el foco de luz de la lámpara, en lugar de depender de paredes 3D rotadas.
+   - Capas superpuestas en distintos planos (cortinas y sombras de fondo más atrás y más oscuras, escritorio y personaje más adelante, nítidos y con más contraste) para sugerir profundidad sin necesidad de rotaciones complejas.
+   - Sombras proyectadas (box-shadow) debajo del escritorio, el sillón y el personaje para anclarlos visualmente al piso.
+   - Si el agente puede lograr además dos paredes y un piso en ángulo isométrico correctamente cerrado (sin huecos, sin verse "abierto" hacia el espectador), genial, es un plus. Pero si no se puede garantizar que la perspectiva quede prolija, es preferible una escena más simple y plana, sin paredes en ángulo, antes que una habitación 3D rota, mal alineada o que no se entienda. La escena nunca debe sacrificar la legibilidad ("se entiende que es la oficina de El Padrino") a cambio de un efecto 3D que salga mal.
+   - Usá pocos elementos pero bien resueltos y reconocibles (escritorio, sillón, lámpara, personaje, cortinas), con proporciones humanas correctas en el personaje (cabeza, torso y piernas claramente diferenciados, nunca un solo bloque de color).
+
+   Incluí título principal "Las Películas que Definieron la Mafia", subtítulo descriptivo y dos CTAs ("Ver el Ranking" y "Crear mi Personaje").
+
+3. Sobre La Famiglia: Sección breve explicando la misión del sitio: reunir y celebrar el mejor cine de mafia con una vuelta de tuerca visual única.
+
+4. Ranking de Películas: Grid de 6 tarjetas (El Padrino, Goodfellas, Scarface, El Padrino II, Casino, Donnie Brasco). Cada tarjeta incluye: número de ranking en "Press Start 2P", título, año, director, puntuación con estrellas doradas (★), descripción corta de 2 líneas, y un personaje icónico de la película en pixel art lateral con CSS y divs. Los personajes deben tener proporciones correctas. Las tarjetas no deben tener ninguna animación de entrada ni efecto de aparición o desvanecimiento. Solo pueden tener efecto hover (box-shadow que crece al pasar el cursor).
+
+5. Creador de Personaje Mafioso: El título de esta sección debe ser algo como "Armá tu personaje mafioso" — una frase directa y temática, sin mencionar términos técnicos. El usuario construye su avatar eligiendo:
+- Tipo de cuerpo: Robusto, Delgado, Alto
+- Color de piel: Claro, Medio, Oscuro
+- Tipo de pelo: Corto liso, Rizado, Calvo
+- Accesorio de cabeza: Sin accesorio, Sombrero fedora, Borsalino negro, Gorra
+- Accesorio en el saco: Sin accesorio, Rosa roja (pequeño cuadrado rojo en el ojal)
+- Ropa: Traje negro con corbata, Traje blanco, Campera de cuero negra
+
+Los sombreros deben tener proporciones correctas respecto a la cabeza. Cada selección actualiza el avatar en tiempo real. Al hacer clic en "Unirme a la Famiglia" mostrar solo una frase aleatoria de entre 8 frases del cine de mafia, sin describir las opciones elegidas. Botón "Descargar mi personaje" usando html2canvas (CDN: https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js) para exportar el avatar como PNG.
+
+Es crítico que el avatar exportado mediante html2canvas se vea EXACTAMENTE igual al avatar mostrado en pantalla, en especial los accesorios de cabeza (sombreros). Para garantizarlo: construí cada accesorio de cabeza únicamente con elementos <div> reales (nunca con pseudo-elementos ::before/::after, ni con box-shadow para simular partes del sombrero, ni con filtros CSS o transformaciones que html2canvas pueda renderizar de forma inconsistente). Antes de invocar html2canvas, asegurate de que las fuentes y estilos estén completamente cargados (por ejemplo, esperando document.fonts.ready). Configurá la llamada a html2canvas con las opciones { backgroundColor: null, scale: 2, useCORS: true } para minimizar diferencias visuales entre la vista previa en pantalla y la imagen descargada.
+
+6. Reseñas: Grid de al menos 3 tarjetas con nombre de usuario estilo Habbo, puntuación y comentario sobre su película favorita. Todas las tarjetas de esta sección deben tener exactamente el mismo tamaño (mismo ancho y mismo alto) entre sí, sin importar cuánto texto tenga cada comentario. Para lograrlo: usá una grilla con altura uniforme (display: grid con grid-auto-rows: 1fr, o flexbox con align-items: stretch), cada tarjeta con una altura fija o min-height idéntica para todas, estructura interna en flex-direction: column, y el texto del comentario limitado a un número fijo de líneas visibles (por ejemplo con -webkit-line-clamp) para que ningún comentario, por más largo que sea, modifique el tamaño final de la tarjeta.
+
+7. Formulario de Contacto: Formulario centrado horizontalmente, con campos: nombre, email, película favorita, mensaje. Estilo pixel art dentro de contenedor tarjeta oscura. Botón de envío con efecto neón. Sin funcionalidad backend.
+
+8. Footer: Logo, copyright "La Famiglia © 2026", links rápidos e íconos de redes sociales con estilo pixel. Los íconos deben iluminarse con glow neón al hacer hover (box-shadow + transition), cada uno con el color de su red social.
+</requirements>
+
+Technical constraints
+<technical_constraints>
+1. Cero dependencias locales: Solo CDN. Importá "Press Start 2P" y "Share Tech Mono" desde Google Fonts. Importá html2canvas desde cdnjs.cloudflare.com. Sin frameworks CSS externos.
+2. CSS puro embebido: Todo en un bloque <style> en el <head>. Incluí @keyframes únicamente para parpadeo neón en bordes y hover en tarjetas. No incluir animaciones de fade-in, aparición ni desvanecimiento en las tarjetas del ranking.
+3. JavaScript mínimo e inline: Solo para el creador de personaje, descarga con html2canvas y navegación. Todo en el mismo archivo.
+4. Completitud estricta: Prohibido usar marcadores como <!-- resto del código -->. El archivo debe renderizarse perfectamente al abrirlo en el navegador.
+5. Responsivo: Media queries nativas: grid de 3 columnas en desktop, 1 columna en mobile.
+6. Contenido de tarjetas sin recortes: Cada tarjeta del ranking debe mostrar todo su contenido sin overflow ni texto cortado. Las tarjetas deben usar height: auto y overflow: visible para crecer según su contenido. Ningún texto debe quedar oculto o truncado bajo ninguna circunstancia. Esta regla aplica únicamente a las tarjetas del Ranking; las tarjetas de Reseñas, en cambio, deben tener todas el mismo tamaño fijo entre sí (ver punto 6 de Requirements).
+7. Consistencia en exportación de imágenes: Cualquier elemento HTML que deba exportarse como imagen mediante html2canvas (el avatar del personaje) tiene que construirse evitando pseudo-elementos, filtros CSS y transformaciones complejas que html2canvas no soporte de forma confiable, para garantizar que el resultado descargado sea visualmente idéntico al elemento mostrado en pantalla.
+</technical_constraints>
+
+Output format
+<output_format>
+Devolvé ÚNICAMENTE el código HTML en un solo bloque. Sin explicaciones ni conclusiones. Tu respuesta debe empezar con <!DOCTYPE html> y terminar con </html>.
+</output_format>
