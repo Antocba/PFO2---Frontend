@@ -433,6 +433,36 @@
       color: #fff;
     }
 
+    .modal-header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: 2px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      padding: 6px 14px;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #000;
+      transition: background-color 0.2s, color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-copy:hover {
+      background-color: var(--neon-cyan);
+      color: #000;
+    }
+
+    .btn-copy.copied {
+      border-color: var(--neon-gold);
+      color: var(--neon-gold);
+    }
+
     .prompt-content {
       font-family: 'Share Tech Mono', monospace;
       font-size: 13px;
@@ -549,7 +579,7 @@
       </div>
 
       <!-- CARD 2: Agente 1 Antigravity -->
-      <a class="access-card" href="./Agente 1-Antigravity/index.html">
+      <a class="access-card" href="./Agente 1-Antigravity/index.html" target="_blank" rel="noopener">
         <div class="card-num">02</div>
 
         <!-- Pixel character icon (blue suit = Gemini) -->
@@ -586,7 +616,7 @@
       </a>
 
       <!-- CARD 3: Agente 2 Codex -->
-      <a class="access-card" href="./Agente 2-Codex/index.html">
+      <a class="access-card" href="./Agente 2-Codex/index.html" target="_blank" rel="noopener">
         <div class="card-num">03</div>
 
         <!-- Pixel character icon (dark suit = GPT) -->
@@ -639,7 +669,10 @@
     <div class="modal-box">
       <div class="modal-header">
         <span class="modal-title">PROMPT UTILIZADO</span>
-        <button class="modal-close" onclick="closePrompt()">✕ CERRAR</button>
+        <div class="modal-header-actions">
+          <button class="btn-copy" id="copyBtn" onclick="copyPrompt()">⧉ COPIAR</button>
+          <button class="modal-close" onclick="closePrompt()">✕ CERRAR</button>
+        </div>
       </div>
       <div class="prompt-content"><span class="ph-comment">## Rol</span>
 Actuá como un desarrollador Frontend Senior especializado en diseño temático, pixel art web y experiencias visuales inmersivas.
