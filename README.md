@@ -2,13 +2,13 @@
 
 ## 👤 Datos del Estudiante
 
-- **Nombre y Apellido:** [COMPLETAR]
-- **Institución:** [COMPLETAR]
-- **Asignatura:** [COMPLETAR]
+- **Nombre y Apellido:** María Antonella Masini
+- **Asignatura:** Desarrollo de Sistemas Web (Front End) - 2° año
+- **Comisión:** D (Viernes)
 
 ## 🎭 Nota del Autor / Disclaimer
 
-Elegí esta temática por gusto personal: soy fan de las películas de mafia, y quería que el proyecto no fuera "una landing más" sino algo divertido de hacer y de mostrar. De ahí surgió la idea de mezclar la elegancia oscura del cine de mafia con la estética lúdica de pixel art tipo Habbo Hotel, y de sumarle una parte interactiva —el Creador de Personaje— para que quien visite el sitio también pueda jugar un poco y armar su propio "mafioso". En general me gusta que las cosas que hago tengan ese costado descontracturado y divertido, y este trabajo fue una buena excusa para combinar eso con el objetivo técnico de la consigna: comparar la capacidad de resolución autónoma de dos agentes de IA.
+Elegí esta temática por gusto personal: soy fan de las películas de mafia, y quería que el proyecto no fuera "una landing más" sino algo divertido de hacer y de mostrar. De ahí surgió la idea de mezclar la elegancia oscura del cine de mafia con la estética de pixel art tipo Habbo Hotel, y de sumarle una parte interactiva —el Creador de Personaje— para que quien visite el sitio también pueda jugar un poco y armar su propio "mafioso". En general me gusta que las cosas que hago tengan ese costado descontracturado y divertido, y este trabajo fue una buena excusa para combinar eso con el objetivo técnico de la consigna: comparar la capacidad de resolución autónoma de dos agentes de IA.
 
 ## 🚀 Deploy Unificado
 
