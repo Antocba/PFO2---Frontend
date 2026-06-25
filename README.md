@@ -12,7 +12,7 @@ Elegí esta temática por gusto personal: soy fan de las películas de mafia, y 
 
 ## 🚀 Deploy Unificado
 
-🔗 [COMPLETAR con el link de Vercel]
+🔗 [DeployVercel](https://la-famiglia-two.vercel.app/)
 
 ## 🤖 Prompt Exacto Utilizado
 
